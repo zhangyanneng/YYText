@@ -1462,13 +1462,13 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
                     _selectedTextRange = [YYTextRange rangeWithRange:newRange];
                 }
             }
-            _selectedTextRange = [self _correctedTextRange:_selectedTextRange];
-            if (notify) [_inputDelegate selectionDidChange:self];
         }
     }
     if (notify) [_inputDelegate textWillChange:self];
     NSRange newRange = NSMakeRange(range.asRange.location, text.length);
     [_innerText replaceCharactersInRange:range.asRange withString:text];
+    _selectedTextRange = [self _correctedTextRange:_selectedTextRange];
+    if (notify) [_inputDelegate selectionDidChange:self];
     [_innerText yy_removeDiscontinuousAttributesInRange:newRange];
     if (notify) [_inputDelegate textDidChange:self];
 }
